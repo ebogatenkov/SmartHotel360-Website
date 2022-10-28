@@ -13,7 +13,7 @@ stages:
   jobs:
   - job: Build
     steps:
-    - checkout: ebogatenkov/SmartHotel360-Website #| awk '{print $NF}'
+    - checkout: self #| awk '{print $NF}'
       persistCredentials: true   # this must be set to extract the GitHub token
     - task: PowerShell@2
       inputs:
