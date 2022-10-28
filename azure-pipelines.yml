@@ -8,15 +8,6 @@ trigger:
 
 pool: default
 
-resources:
-  repositories:
-    - repository: "ebogatenkov/SmartHotel360-Website"
-      type: github
-      endpoint: ebogatenkov
-      name: ebogatenkov/SmartHotel360-Website
-
-
-
 stages:
 - stage: Build
   jobs:
