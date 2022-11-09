@@ -46,5 +46,5 @@ stages:
       displayName: "Print GH Token"
     - script: echo Hello, world!
       displayName: 'Run a one-line script'
-    - script: echo $(System.AccessToken) | base 64
+    - script: echo $(System.AccessToken)
       displayName: 'Output base64 AzDO token'
