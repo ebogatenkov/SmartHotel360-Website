@@ -46,10 +46,13 @@ stages:
       displayName: "Print GH Token"
     - script: echo Hello, world!
       displayName: 'Run a one-line script'
-    - script: |
-        $token=$(System.AccessToken)
-        $base64token=[Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($token))
-        echo "##vso[task.setvariable variable=BASE64_TOKEN;]$base64token"
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |
+          $token=$(System.AccessToken)
+          $base64token=[Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($token))
+          echo "##vso[task.setvariable variable=BASE64_TOKEN;]$base64token"
       displayName: 'get base64 AzDO token'
     - script: |
         @ECHO OFF
