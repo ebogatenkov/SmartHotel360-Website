@@ -21,37 +21,37 @@ stages:
     steps:
     - checkout: self #| awk '{print $NF}'
       persistCredentials: true   # this must be set to extract the GitHub token
-    - task: PowerShell@2
-      inputs:
-        targetType: 'inline'
-        script: |
-          $remote_url=(git config remote.origin.url)
-          $remote_auth=(git config http.$remote_url.extraheader)
-          $remote_auth_token=($remote_auth.Split(" ")[-1])
-          $remote_auth_token_decode=([System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String($remote_auth_token)))
-          $remote_auth_token_decode_extract=($remote_auth_token_decode.Split(":")[-1])
-          echo "##vso[task.setvariable variable=GITHUB_TOKEN;]$remote_auth_token_decode_extract"
-      displayName: "Get GITHUB_TOKEN"
-    - script: |
-        @ECHO OFF
-        :: string terminator: chose something that won't show up in the input file
-        SET strterm=___ENDOFSTRING___
-        :: read first line of input file
-        SET mytext=test
-        :: add string terminator to input
-        SET tmp=%GITHUB_TOKEN%%strterm%
-        :loop
-        :: get first character from input
-        SET char=%tmp:~0,1%
-        :: remove first character from input
-        SET tmp=%tmp:~1%
-        :: do something with %char%, e.g. simply print it out
-        ECHO char: %char%
-        :: repeat until only the string terminator is left
-        IF NOT "%tmp%" == "%strterm%" GOTO loop
-      displayName: "Print GH Token"
-    - script: echo Hello, world!
-      displayName: 'Run a one-line script'
+    # - task: PowerShell@2
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       $remote_url=(git config remote.origin.url)
+    #       $remote_auth=(git config http.$remote_url.extraheader)
+    #       $remote_auth_token=($remote_auth.Split(" ")[-1])
+    #       $remote_auth_token_decode=([System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String($remote_auth_token)))
+    #       $remote_auth_token_decode_extract=($remote_auth_token_decode.Split(":")[-1])
+    #       echo "##vso[task.setvariable variable=GITHUB_TOKEN;]$remote_auth_token_decode_extract"
+    #   displayName: "Get GITHUB_TOKEN"
+    # - script: |
+    #     @ECHO OFF
+    #     :: string terminator: chose something that won't show up in the input file
+    #     SET strterm=___ENDOFSTRING___
+    #     :: read first line of input file
+    #     SET mytext=test
+    #     :: add string terminator to input
+    #     SET tmp=%GITHUB_TOKEN%%strterm%
+    #     :loop
+    #     :: get first character from input
+    #     SET char=%tmp:~0,1%
+    #     :: remove first character from input
+    #     SET tmp=%tmp:~1%
+    #     :: do something with %char%, e.g. simply print it out
+    #     ECHO char: %char%
+    #     :: repeat until only the string terminator is left
+    #     IF NOT "%tmp%" == "%strterm%" GOTO loop
+    #   displayName: "Print GH Token"
+    # - script: echo Hello, world!
+    #   displayName: 'Run a one-line script'
     - task: PowerShell@2
       inputs:
         targetType: 'inline'
