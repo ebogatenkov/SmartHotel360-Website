@@ -10,9 +10,9 @@ pool: default
 
 resources:
   repositories:
-    - repository: ebogatenkov
+    - repository: proj
       type: git
-      name: ebogatenkov
+      name: proj
 
 stages:
 - stage: Build
