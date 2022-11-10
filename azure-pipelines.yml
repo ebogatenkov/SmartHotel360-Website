@@ -8,6 +8,12 @@ trigger:
 
 pool: default
 
+resources:
+  repositories:
+    - repository: ebogatenkov
+      type: git
+      name: ebogatenkov
+
 stages:
 - stage: Build
   jobs:
