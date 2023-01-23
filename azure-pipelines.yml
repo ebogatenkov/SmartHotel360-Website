@@ -14,21 +14,24 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
+resources:
+  repositories:
+  - repository: common
+    type: github
+    name: ebogatenkov/SmartHotel360-Website
+    endpoint: github.com_ebogatenkov
+
 steps:
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
+- checkout: common
+- task: PowerShell@2
   inputs:
-    restoreSolution: '$(solution)'
-
-- task: VSBuild@1
+    targetType: 'inline'
+    script: |
+      $abc="123"
+      echo "##vso[task.setvariable variable=GITHUB_TOKEN;]$abc"
+- task: PowerShell@2
   inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    targetType: 'inline'
+    script: |
+      $abc
+      $Env:GITHUB_TOKEN
