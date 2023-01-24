@@ -7,7 +7,7 @@ trigger:
 - none
 
 pool:
-  default
+  Azure Pipelines
 
 variables:
   solution: '**/*.sln'
